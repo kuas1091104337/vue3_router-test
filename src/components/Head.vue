@@ -21,7 +21,6 @@ export default {
         <router-link class="nav_item" to="/reactjs">REACTJS</router-link>
         <router-link class="nav_item" to="/html5">HTML5</router-link>
         <router-link class="nav_item" to="/nodejs">NODEJS</router-link>
-        <!-- <a href="javascript:;"></a> -->
       </div>
     </nav>
   </header>
