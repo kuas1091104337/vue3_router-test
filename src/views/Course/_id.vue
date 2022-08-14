@@ -12,12 +12,13 @@ export default {
     onMounted(() => {
       console.log(route); //console.log(route.params.id);
       axios.get(`https://vue-lessons-api.herokuapp.com/courses/${route.params.id}`)
-      .then(function(res){
+      .then((res) => {
         // https://vue-lessons-api.herokuapp.com/courses/{id} // 取得單一課程內容
         // console.log(res.data); console.log(res.data.data);
         // console.log(res.data.data[0]); console.log(res.data.data[0].teacher.name);
+        console.log(res);
         dataArr.data = res.data.data[0];
-      }).catch(function(error){
+      }).catch((error) => {
         console.log(error.response.data.error_message); // 不是2XX系列進來catch
         isError.value = true;
         dataArr.data.error_message = error.response.data.error_message;
@@ -41,7 +42,12 @@ export default {
       <h1>{{dataArr.data.name}}</h1>
       <h2>NTD:{{dataArr.data.money}}</h2>
       <img :src="dataArr.data.photo" :alt="dataArr.data.name" />
-      <div v-if="Object.keys(dataArr.data).length !== 0">
+      <!-- s-1 -->
+      <!-- <div v-if="Object.keys(dataArr.data).length !== 0"> -->
+      <!-- s-2 -->
+      <!-- <div v-if="Object.keys(dataArr.data).length"> -->
+      <!-- s-3 -->
+      <div v-if="dataArr.data.teacher">
         <img :src="dataArr.data.teacher.img" alt="" />
         <p>{{dataArr.data.teacher.name}}</p>
       </div>

@@ -1,19 +1,28 @@
 <script>
-import { ref, watch } from '@vue/runtime-core';
-// import { ref, watch } from "vue";
+import { ref, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
 export default {
   setup() {
     const activeNum = ref(0),
-          navArr = ['','about','Course'],
-          route = useRoute();
-          console.log(route);
-          console.log(route.path);
+          // activeNum = ref(0),
+          routerArr = ['','about','Course'],
+          route = useRoute();//,
+          // computedNum = computed(() => {
+          //   const path = route.path.substr(1).split('/')[0];
+          //   const nowIdx = routerArr.forEach((el, idx) => {
+          //     if(path === el) return idx;
+          //   });
+          //   console.log(nowIdx);
+          //   return nowIdx;
+          // });
+          
+          // console.log(route);
+          // console.log(route.path);
+          // console.log(computedNum.value);
     watch(() => route.path, () => {
-      // console.log(route.path)
       const path = route.path.substr(1).split('/')[0];
       console.log(path);
-      navArr.forEach((item, idx) => {
+      routerArr.forEach((item, idx) => {
         if(path === item) activeNum.value = idx;
       });
     })
@@ -29,23 +38,30 @@ export default {
     //     });
     //   }
     // );
-    return { activeNum };
+    return {
+      activeNum//, computedNum 
+    };
   },
 };
 </script>
 
 <template>
   <div id="nav">
-    <router-link to="/" :class="{active: activeNum === 0}">Home</router-link>
+    <router-link to="/" :class="['nav_item',{active: activeNum === 0}]">Home</router-link>
     |
-    <router-link to="/about" :class="{active: activeNum === 1}">About</router-link>
+    <router-link to="/about" :class="['nav_item',{active: activeNum === 1}]">About</router-link>
     |
-    <router-link to="/Course" :class="{active: activeNum === 2}">Course</router-link>
-    <!-- <router-link :class="{ active: idx === 0 }" to="/">Home</router-link>
+    <router-link to="/Course" :class="['nav_item',{active: activeNum === 2}]">Course</router-link>
+    <!-- <router-link to="/" :class="['nav_item',{active: activeNum === 0},{now: computedNum === 0}]">Home</router-link>
     |
-    <router-link :class="{ active: idx === 1 }" to="/about">About</router-link>
+    <router-link to="/about" :class="['nav_item',{active: activeNum === 1},{now: computedNum === 1}]">About</router-link>
     |
-    <router-link :class="{ active: idx === 2 }" to="/courses">Courses</router-link> -->
+    <router-link to="/Course" :class="['nav_item',{active: activeNum === 2},{now: computedNum === 2}]">Course</router-link> -->
+    <!-- <router-link to="/">Home</router-link>
+    |
+    <router-link to="/about">About</router-link>
+    |
+    <router-link to="/Course">Courses</router-link> -->
   </div>
   <router-view></router-view>
   <!-- <router-view/> -->
@@ -78,6 +94,6 @@ html, body {
     font-weight: bold;
   }
   // > .router-link-active{color:#42b983;}
-  > .active{color:#42b983;}
+  > .active, > .router-link-active{color:#42b983;}
 }
 </style>
