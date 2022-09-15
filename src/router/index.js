@@ -99,7 +99,8 @@ const routes = [
   // },
   // show 404 page 放最後
   {
-    path: '/:pathMatch(.*)',
+    // path: '/:pathMatch(.*)',
+    path: '/:domain(.*)',
     component: NotFound
   }
 ]
